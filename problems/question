@@ -1,0 +1,13 @@
+// static String str0="0123456789";
+    // static String str1="0123456789";
+    // String str2=str1.substring(5);
+    // String str3=new String(str2);
+    // String str4=new String(str3.toCharArray());
+    // str0=null;
+    // 假定str0,...,str4后序代码都是只读引用。
+    // Java 7中，以上述代码为基础，在发生过一次FullGC后，上述代码在Heap空间（不包括PermGen）保留的字符数为（）
+    // 5
+    // 10
+    // 15
+    // 20
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
