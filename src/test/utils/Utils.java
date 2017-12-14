@@ -1,6 +1,8 @@
 package test.utils;
 
 import java.math.BigDecimal;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +20,7 @@ public class Utils {
       return stringBufferIsEmpty((StringBuffer) obj);
     } else if (obj instanceof String[]) {
       return arrayStrIsEmpty((String[]) obj);
-    }else if (obj instanceof Map) {
+    } else if (obj instanceof Map) {
       return mapIsEmpty((Map<?, ?>) obj);
     }
     return false;
@@ -51,8 +53,8 @@ public class Utils {
     }
     return false;
   }
-  
-  private static boolean mapIsEmpty(Map<?,?> map) {
+
+  private static boolean mapIsEmpty(Map<?, ?> map) {
     if (map.isEmpty()) {
       return true;
     }
@@ -87,5 +89,39 @@ public class Utils {
       }
     }
     return (T) object;
+  }
+
+  public static void main(String[] args) {
+    System.err.println(JM("7d216efc62c70e1d5961078216db895e"));
+  }
+
+  public static String md5(String str) {
+    MessageDigest md;
+    StringBuffer sb = new StringBuffer();
+    try {
+      md = MessageDigest.getInstance("MD5");
+      md.update(str.getBytes());
+      byte[] data = md.digest();
+      int index;
+      for (byte b : data) {
+        index = b;
+        if (index < 0) index += 256;
+        if (index < 16) sb.append("0");
+        sb.append(Integer.toHexString(index));
+      }
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+    }
+    return sb.toString();
+  }
+  
+  // 加密后解密
+  public static String JM(String inStr) {
+    char[] a = inStr.toCharArray();
+    for (int i = 0; i < a.length; i++) {
+      a[i] = (char) (a[i] ^ 't');
+    }
+    String k = new String(a);
+    return k;
   }
 }
